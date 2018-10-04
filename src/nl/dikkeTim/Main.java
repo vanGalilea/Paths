@@ -9,7 +9,13 @@ import java.nio.file.attribute.BasicFileAttributes;
 public class Main {
 
     public static void main(String[] args) {
-
+        System.out.println("walking tree for someFolder-->");
+        Path folderPath = FileSystems.getDefault().getPath("filetree" + File.separator + "someFolder");
+        try {
+            Files.walkFileTree(folderPath, new PrintNames());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void printDirsFiles(Path dirPath) throws IOException, DirectoryIteratorException {
