@@ -9,14 +9,22 @@ import java.nio.file.attribute.BasicFileAttributes;
 public class Main {
 
     public static void main(String[] args) {
+//        DirectoryStream.Filter<Path> filter =
+//            new DirectoryStream.Filter<Path>() {
+//                public boolean accept(Path path) throws IOException {
+//                    return (Files.isRegularFile(path));
+//                }
+//            };
+        DirectoryStream.Filter<Path> filter = p-> Files.isRegularFile(p); //lambda expression shorthand, I LIKE ;)
+
         Path someFolderPath = FileSystems.getDefault().getPath("filetree/someFolder");
-        try(DirectoryStream<Path> contents = Files.newDirectoryStream(someFolderPath)) {
+        try(DirectoryStream<Path> contents = Files.newDirectoryStream(someFolderPath, filter)) {
             for(Path file : contents) {
                 System.out.println(file.getFileName());
             }
 
 
-        } catch(IOException e) {
+        } catch(IOException | DirectoryIteratorException e) {
             e.printStackTrace();
         }
     }
