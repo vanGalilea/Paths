@@ -17,7 +17,8 @@ public class Main {
 //            };
         DirectoryStream.Filter<Path> filter = p-> Files.isRegularFile(p); //lambda expression shorthand, I LIKE ;)
 
-        Path someFolderPath = FileSystems.getDefault().getPath("filetree/someFolder");
+//        Path someFolderPath = FileSystems.getDefault().getPath("filetree/someFolder");
+        Path someFolderPath = FileSystems.getDefault().getPath("filetree" + File.separator + "someFolder"); // to support all operating systems
         try(DirectoryStream<Path> contents = Files.newDirectoryStream(someFolderPath, filter)) {
             for(Path file : contents) {
                 System.out.println(file.getFileName());
@@ -27,6 +28,14 @@ public class Main {
         } catch(IOException | DirectoryIteratorException e) {
             e.printStackTrace();
         }
+
+        try {
+           Path tempFile = Files.createTempFile("StevesTempFile", ".someSuffix");
+            System.out.println("Temp file created in path: " + tempFile.toAbsolutePath());
+        } catch(IOException | DirectoryIteratorException e) {
+            e.printStackTrace();
+        }
+        printFileStores();
     }
 
     private static void printFile(Path path) {
@@ -48,5 +57,13 @@ public class Main {
         System.out.println("Created: " + attrs.creationTime());
         System.out.println("Is directory: " + attrs.isDirectory());
         System.out.println("Is regular: " + attrs.isRegularFile());
+    }
+
+
+    private static void printFileStores() {
+        Iterable<FileStore> stores = FileSystems.getDefault().getFileStores();
+        for(FileStore store : stores) {
+            System.out.println(store.name());
+        }
     }
 }
