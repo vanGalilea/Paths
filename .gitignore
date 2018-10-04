@@ -7,6 +7,7 @@ node_modules
 *.log
 
 # Ignore settings
+**/out
 **/.settings
 **/target
 /.settings
@@ -20,3 +21,4 @@ node_modules
 # Ignore system files
 .DS_Store
 ._*
+
