@@ -9,33 +9,20 @@ import java.nio.file.attribute.BasicFileAttributes;
 public class Main {
 
     public static void main(String[] args) {
-//        DirectoryStream.Filter<Path> filter =
-//            new DirectoryStream.Filter<Path>() {
-//                public boolean accept(Path path) throws IOException {
-//                    return (Files.isRegularFile(path));
-//                }
-//            };
-        DirectoryStream.Filter<Path> filter = p-> Files.isRegularFile(p); //lambda expression shorthand, I LIKE ;)
 
-//        Path someFolderPath = FileSystems.getDefault().getPath("filetree/someFolder");
-        Path someFolderPath = FileSystems.getDefault().getPath("filetree" + File.separator + "someFolder"); // to support all operating systems
-        try(DirectoryStream<Path> contents = Files.newDirectoryStream(someFolderPath, filter)) {
-            for(Path file : contents) {
-                System.out.println(file.getFileName());
-            }
+    }
 
-
-        } catch(IOException | DirectoryIteratorException e) {
-            e.printStackTrace();
+    private static void printDirsFiles(Path dirPath) throws IOException, DirectoryIteratorException {
+        DirectoryStream.Filter<Path> filter = p-> Files.isRegularFile(p);
+        DirectoryStream<Path> contents = Files.newDirectoryStream(dirPath, filter);
+        for(Path file : contents) {
+            System.out.println(file.getFileName());
         }
+    }
 
-        try {
-           Path tempFile = Files.createTempFile("StevesTempFile", ".someSuffix");
-            System.out.println("Temp file created in path: " + tempFile.toAbsolutePath());
-        } catch(IOException | DirectoryIteratorException e) {
-            e.printStackTrace();
-        }
-        printFileStores();
+        private static void createTempFile(String prefix, String suffix) throws IOException {
+        Path tempFile = Files.createTempFile(prefix, suffix);
+        System.out.println("Temp file created in path: " + tempFile.toAbsolutePath());
     }
 
     private static void printFile(Path path) {
