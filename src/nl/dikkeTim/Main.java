@@ -10,19 +10,6 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-//            Path fileToCreate = FileSystems.getDefault().getPath("files", "newFile.txt");
-//            Files.createFile(fileToCreate);
-//            Path dirToCreate = FileSystems.getDefault().getPath("newFolder");
-//            Files.createDirectory(dirToCreate);
-//            Path dirToCreate = FileSystems.getDefault().getPath("newFolder", "new1/new2/new3");
-//            Files.createDirectories(dirToCreate);
-            Path filePath = FileSystems.getDefault().getPath("files", "subdir.txt");
-            BasicFileAttributes attrs = Files.readAttributes(filePath, BasicFileAttributes.class);
-            System.out.println("Size: " + attrs.size());
-            System.out.println("Last modified: " + attrs.lastModifiedTime());
-            System.out.println("Created: " + attrs.creationTime());
-            System.out.println("Is directory: " + attrs.isDirectory());
-            System.out.println("Is regular: " + attrs.isRegularFile());
 
         } catch(IOException e) {
             e.printStackTrace();
@@ -39,5 +26,14 @@ public class Main {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    private static void printFileAttributes(Path path) throws IOException {
+        BasicFileAttributes attrs = Files.readAttributes(path, BasicFileAttributes.class);
+        System.out.println("Size: " + attrs.size());
+        System.out.println("Last modified: " + attrs.lastModifiedTime());
+        System.out.println("Created: " + attrs.creationTime());
+        System.out.println("Is directory: " + attrs.isDirectory());
+        System.out.println("Is regular: " + attrs.isRegularFile());
     }
 }
