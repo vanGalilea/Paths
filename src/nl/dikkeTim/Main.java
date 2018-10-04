@@ -9,7 +9,12 @@ import java.nio.file.attribute.BasicFileAttributes;
 public class Main {
 
     public static void main(String[] args) {
-        try {
+        Path someFolderPath = FileSystems.getDefault().getPath("filetree/someFolder");
+        try(DirectoryStream<Path> contents = Files.newDirectoryStream(someFolderPath)) {
+            for(Path file : contents) {
+                System.out.println(file.getFileName());
+            }
+
 
         } catch(IOException e) {
             e.printStackTrace();
