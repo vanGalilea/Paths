@@ -1,4 +1,0 @@
-File1 within anotherFolder.
-In consequat ac lacus vitae ornare.
-Vestibulum cursus urna tellus, vitae placerat elit euismod in.
-Aliquam at lobortis lacus.
