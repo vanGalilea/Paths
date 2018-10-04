@@ -7,6 +7,7 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 
 public class PrintNames extends SimpleFileVisitor<Path> {
+
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
         System.out.println(dir.toAbsolutePath());
